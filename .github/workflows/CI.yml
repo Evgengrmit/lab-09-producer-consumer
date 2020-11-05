@@ -58,4 +58,5 @@ jobs:
               git submodule update --init
       - name: quality
         run:
+          ./scripts/genenv.sh &&
           docker run -v `pwd`:`pwd` -w `pwd` -t rusdevops/bootstrap-cpp scripts/coverage.sh
