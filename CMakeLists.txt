@@ -26,8 +26,17 @@ string(APPEND CMAKE_CXX_FLAGS " -Wshadow -Wnon-virtual-dtor")
 
 hunter_add_package(gumbo)
 find_package(gumbo CONFIG REQUIRED)
-hunter_add_package(Boost COMPONENTS program_options thread log filesystem)
-find_package(Boost CONFIG REQUIRED program_options thread log log_setup filesystem)
+hunter_add_package(Boost COMPONENTS program_options
+        thread
+        #log
+        filesystem
+        )
+find_package(Boost CONFIG REQUIRED program_options
+        thread
+        #log
+        #log_setup
+        filesystem
+        )
 hunter_add_package(OpenSSL)
 find_package(OpenSSL REQUIRED)
 find_package(Threads)
@@ -52,9 +61,9 @@ target_link_libraries(tests
         OpenSSL::SSL
         Boost::program_options
         Boost::filesystem
-        Boost::log
+        #Boost::log
         Boost::thread
-        Boost::log_setup
+        #Boost::log_setup
         GTest::gtest_main)
 
 enable_testing()
