@@ -44,19 +44,3 @@ jobs:
       - name: tests
         run:
           docker run -v `pwd`:`pwd` -w `pwd` -t rusdevops/bootstrap-cpp scripts/tests.sh
-
-
-  quality:
-    runs-on: ubuntu-latest
-    timeout-minutes: 25
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-      - name: prepare environment
-        run:  sudo apt install git &&
-              git submodule update --init
-      - name: quality
-        run:
-          ./scripts/genenv.sh &&
-          docker run -v `pwd`:`pwd` -w `pwd` -t rusdevops/bootstrap-cpp scripts/coverage.sh
