@@ -26,8 +26,8 @@ string(APPEND CMAKE_CXX_FLAGS " -Wshadow -Wnon-virtual-dtor")
 
 hunter_add_package(gumbo)
 find_package(gumbo CONFIG REQUIRED)
-hunter_add_package(Boost COMPONENTS program_options thread)
-find_package(Boost CONFIG REQUIRED program_options thread)
+hunter_add_package(Boost COMPONENTS program_options thread log filesystem)
+find_package(Boost CONFIG REQUIRED program_options thread log log_setup filesystem)
 hunter_add_package(OpenSSL)
 find_package(OpenSSL REQUIRED)
 find_package(Threads)
@@ -38,7 +38,7 @@ find_package(GTest CONFIG REQUIRED)
 
 add_executable(tests
         # TODO: enum your files and delete this comment
-        ${CMAKE_CURRENT_SOURCE_DIR}/sources/source.cpp
+        #${CMAKE_CURRENT_SOURCE_DIR}/sources/source.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/tests/test.cpp
         )
 
@@ -51,8 +51,11 @@ target_link_libraries(tests
         gumbo::gumbo
         OpenSSL::SSL
         Boost::program_options
+        Boost::filesystem
+        Boost::log
         Boost::thread
-        GTest::gtest_main )
+        Boost::log_setup
+        GTest::gtest_main)
 
 enable_testing()
 add_test(NAME unit_tests COMMAND tests)
