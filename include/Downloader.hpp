@@ -108,7 +108,7 @@ std::string Downloader::download_url(const std::string& host_,
     http::response<http::string_body> res;
     // Получение HTTP-ответа
     http::read(stream, buffer, res);
-    // Корректное закрытие потока
+    // Корректное закрытие сокета
     boost::system::error_code ec;
     // stream.shutdown(ec);
     // Обработка исключений, возникающих при закрытии
@@ -125,7 +125,7 @@ std::string Downloader::download_url(const std::string& host_,
   }
   return "";
 }
-//Парсинг url-адреса хоста
+//Парсинг url-получение адреса хоста
 std::string Downloader::parse_url_to_host(std::string url_) {
   if (url_.find("https://") == 0) url_ = url_.substr(8);
   std::string result_host;
@@ -135,7 +135,7 @@ std::string Downloader::parse_url_to_host(std::string url_) {
   }
   return result_host;
 }
-//Парсинг url-адреса цели
+//Парсинг url-получение цели
 std::string Downloader::parse_url_to_target(std::string url_) {
   if (url_.find("https:") == 0) url_ = url_.substr(8);
   std::string result_target;
